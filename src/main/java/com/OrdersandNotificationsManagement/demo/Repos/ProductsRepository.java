@@ -35,4 +35,14 @@ public class ProductsRepository {
         }
         return false;
     }
+
+    public static Product iProductFound (Integer serialNumber)
+    {
+        for (Product p:Products)
+        {
+            if(p.getSerialnumber().equals(serialNumber))
+                return p;
+        }
+        return null;
+    }
 }

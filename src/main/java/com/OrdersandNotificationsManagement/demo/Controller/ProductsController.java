@@ -19,9 +19,9 @@ public class ProductsController {
         return Products;
     }
 
-    @GetMapping("/{serialNumber}")
-    public boolean getProductById(@PathVariable("serialNumber") int serialNumber) {
-        Boolean chk = productsRepository.isProductFound(serialNumber);
+    @GetMapping("/{serialNumber}") // http://localhost:8080/products/1
+    public Product getProductById(@PathVariable("serialNumber") int serialNumber) {
+        Product chk = productsRepository.iProductFound(serialNumber);
         return chk;
     }
 }
