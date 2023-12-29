@@ -5,7 +5,7 @@ import com.OrdersandNotificationsManagement.demo.Model.Product;
 
 import java.util.ArrayList;
 
-public interface Repository
+public interface Repository<T>
 {
-    public ArrayList<Customer> ViewRepo();
+    ArrayList<T> ViewRepo();
 }

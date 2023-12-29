@@ -5,13 +5,14 @@ import com.OrdersandNotificationsManagement.demo.Model.Product;
 
 import java.util.ArrayList;
 
-public class CustomersRepository implements Repository
+public class CustomersRepository implements Repository<Customer>
 {
-  public static ArrayList<Customer>Customers=new ArrayList<>();
+    public static ArrayList<Customer> Customers = new ArrayList<>();
+
     @Override
     public ArrayList<Customer> ViewRepo()
     {
-      return Customers;
+        return Customers;
     }
 
    public static void AddCustomer(Customer c)

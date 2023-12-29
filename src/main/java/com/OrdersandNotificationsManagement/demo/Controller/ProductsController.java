@@ -10,11 +10,13 @@ import com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository;
 
 @RestController
 @RequestMapping(value = "/products")
-public class ProductsController {
+public class ProductsController
+{
     ProductsRepository productsRepository = new ProductsRepository();
 
     @GetMapping("/all")
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts()
+    {
         ArrayList<Product> Products = productsRepository.ViewRepo();
         return Products;
     }

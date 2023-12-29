@@ -5,14 +5,17 @@ import com.OrdersandNotificationsManagement.demo.Model.Product;
 
 import java.util.ArrayList;
 
-public class ProductsRepository {
+public class ProductsRepository implements Repository
+{
     public static ArrayList<Product> Products = new ArrayList<>();
-    public ProductsRepository() {
+    public ProductsRepository()
+    {
         Category c1 = new Category("C", 1);
         Product p1 = new Product(c1, 1, "Product1", "V1", 200);
         Products.add(p1);
     }
 
+    @Override
     public ArrayList<Product> ViewRepo()
     {
         return Products;

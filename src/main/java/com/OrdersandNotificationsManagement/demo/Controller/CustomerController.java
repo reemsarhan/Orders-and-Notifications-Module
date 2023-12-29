@@ -51,7 +51,8 @@ public class CustomerController {
 
     @GetMapping("/view")
 
-    public ArrayList<Customer> view() {
+    public ArrayList<Customer> view()
+    {
         return rep.ViewRepo();
     }
 
