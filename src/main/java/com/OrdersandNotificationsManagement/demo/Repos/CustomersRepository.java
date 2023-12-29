@@ -34,4 +34,23 @@ public class CustomersRepository implements Repository<Customer>
         }
         return false;
     }
+
+    public static Customer getCustomer(String UserName,String  Password)
+    {
+        for (Customer cus:Customers)
+        {
+            if(cus.GetUserName().equals(UserName)&& cus.GetPassword().equals(Password))
+                return cus;
+        }
+        return null;
+    }
+
+    public static Customer GetCustomer(String username)
+    {
+        for(Customer c:Customers)
+        {
+            if(c.GetUserName().equals(username))return c;
+        }
+        return null;
+    }
 }

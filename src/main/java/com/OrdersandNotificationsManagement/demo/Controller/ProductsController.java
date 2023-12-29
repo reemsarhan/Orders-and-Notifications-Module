@@ -9,12 +9,12 @@ import com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository;
 
 
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/products") // http://localhost:8080/products
 public class ProductsController
 {
     ProductsRepository productsRepository = new ProductsRepository();
 
-    @GetMapping("/all")
+    @GetMapping("/all") // localhost:8080/products/all
     public List<Product> getAllProducts()
     {
         ArrayList<Product> Products = productsRepository.ViewRepo();
@@ -22,7 +22,6 @@ public class ProductsController
         {
             return Products;
         }
-        //i want to return to api message that he has to login first
       return null;
     }
 
@@ -30,7 +29,7 @@ public class ProductsController
     public Product getProductById(@PathVariable("serialNumber") int serialNumber) {
         if (com.OrdersandNotificationsManagement.demo.Model.LoggedInResponse.GetStatus() == true)
         {
-            Product chk = productsRepository.iProductFound(serialNumber);
+            Product chk = productsRepository.searchProduct(serialNumber);
             return chk;
         }
         else

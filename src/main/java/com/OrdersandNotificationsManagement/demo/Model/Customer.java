@@ -2,20 +2,23 @@ package com.OrdersandNotificationsManagement.demo.Model;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer
+{
     String name;
-    String phonenumber;
-    String  region;
+    String phone;
+    Region region;
     String address;
-   String username;
+    String username;
     String password;
     Double balance;
-    ArrayList<Order>CustomerOrders=new ArrayList<>();
 
-    public Customer(String name, String phonenumber, String region, String address, String userame, String password, Double balance)
-    {
+    ArrayList<Order> CustomerOrders = new ArrayList<>();
+
+
+
+    public Customer(String name, String phonenumber, Region region, String address, String userame, String password, Double balance) {
         this.name = name;
-        this.phonenumber = phonenumber;
+        this.phone = phonenumber;
         this.region = region;
         this.address = address;
         this.username = userame;
@@ -23,44 +26,50 @@ public class Customer {
         this.balance = balance;
     }
 
-    public String getregion()
-    {
+
+    public Region getregion() {
         return region;
     }
 
-    public String getphonenumber()
-    {
-        return phonenumber;
+    public String getphonenumber() {
+        return phone;
     }
 
-    public String getname()
-    {
+    public String getname() {
         return name;
     }
-    public String getaddress()
-    {
+
+    public String getaddress() {
         return address;
     }
-    public double getbalance()
-    {
+
+    public double getbalance() {
         return balance;
     }
-    public String getusername()
-    {
+
+    public String getusername() {
         return username;
     }
-    public String  getpassword()
-    {
+
+    public String getpassword() {
         return password;
     }
 
-  public String GetUserName()
-  {
-      return username;
-  }
-  public String GetPassword()
-  {
-      return password;
-  }
+    public String GetUserName() {
+        return username;
+    }
+
+    public String GetPassword() {
+        return password;
+    }
+
+    public void setbalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void UpdateBalance(double amount)
+    {
+        balance-=amount;
+    }
 
 }

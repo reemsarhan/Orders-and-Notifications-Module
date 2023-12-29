@@ -1,18 +1,20 @@
 package com.OrdersandNotificationsManagement.demo.Model;
 
-public class Product
-{
+public class Product {
     Category category;
     Integer serialnumber;
     String name;
     String vendor;
     double price;
-    public Product(Category category, Integer serialnumber, String name, String vendor, double price) {
+    Integer totalComponents;
+
+    public Product(Category category, Integer serialnumber, String name, String vendor, double price, Integer totalComponents) {
         this.category = category;
         this.serialnumber = serialnumber;
         this.name = name;
         this.vendor = vendor;
         this.price = price;
+        this.totalComponents = totalComponents;
     }
 
     public Category getCategory() {
@@ -35,6 +37,12 @@ public class Product
         return price;
     }
 
+    public Integer gettotalComponents()
+    {
+        return totalComponents;
+    }
+
+
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -55,13 +63,23 @@ public class Product
         this.price = price;
     }
 
+    public void settotalComponents(Integer totalComponents) {
+        this.totalComponents = totalComponents;
+    }
+
+    public void updatetotalComponents(Integer DecComponents)
+    {
+        totalComponents-=DecComponents;
+    }
     public String toString() {
         return "Product{" +
                 "category=" + category +
                 ", serialnumber=" + serialnumber +
                 ", name='" + name + '\'' +
                 ", vendor='" + vendor + '\'' +
-                ", price=" + price +
+                ", price=" + price + '\'' +
+                ", totalComponents=" + totalComponents + '\'' +
                 '}';
+
     }
 }

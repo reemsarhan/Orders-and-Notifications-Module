@@ -1,11 +1,8 @@
 package com.OrdersandNotificationsManagement.demo.Controller;
 
 
+import com.OrdersandNotificationsManagement.demo.Model.*;
 import com.OrdersandNotificationsManagement.demo.Model.Channel.EmailChannel;
-import com.OrdersandNotificationsManagement.demo.Model.Customer;
-import com.OrdersandNotificationsManagement.demo.Model.Notification;
-import com.OrdersandNotificationsManagement.demo.Model.Response;
-import com.OrdersandNotificationsManagement.demo.Model.SimpleOrder;
 import com.OrdersandNotificationsManagement.demo.Model.Template.UsernameProductTemplateEnglish;
 import com.OrdersandNotificationsManagement.demo.Repos.NotificationQueue;
 import com.OrdersandNotificationsManagement.demo.Service.NotificationService;
@@ -23,22 +20,26 @@ public class NotificationController {
     private final NotificationService notificationService = new NotificationService();
 
     @GetMapping("/send")
-    public Response sendAllNotifications(){
+    public Response sendAllNotifications()   //http://localhost:8080/notification/send
+    {
         return notificationService.sendAllNotifications();
     }
-    @GetMapping("/view")
-    public List<Notification> viewAllNotifications(){
-        try {
+
+    @GetMapping("/view") //http://localhost:8080/notification/view
+    public List<Notification> viewAllNotifications()
+    {
+        try
+        {
             NotificationQueue.AddNotification(new Notification(
-                    new Customer("ahmed", "0100", "cairo", "tam", "abdelrhman", "abd", 100.0),
-                    new SimpleOrder() ,
+                    new Customer("Ahmed", "0100", Region.valueOf("Dokki"),"Cairo", "Tam", "Abdelrhman",  100.0),
+                    new SimpleOrder(),
                     new EmailChannel(),
-                    new UsernameProductTemplateEnglish("abdelrhman","Mobile Charger")
+                    new UsernameProductTemplateEnglish("Abdelrahman", "Mobile Charger")
             ));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
-        for (Notification n: notificationService.viewAllNotifications()) {
+        for (Notification n : notificationService.viewAllNotifications()) {
             System.out.println(n);
         }
         return notificationService.viewAllNotifications();

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/Customer")
+@RequestMapping("/customer")
 
 public class CustomerController {
     CustomerService customerservice = new CustomerService();
     CustomersRepository rep = new CustomersRepository();
     LoggedInResponse logged_status;
-    @PostMapping("/createaccount")
+
+    @PostMapping("/create")
     public Response addCustomer(@RequestBody Customer c) {
         boolean res = customerservice.addCustomer(c);
         Response response = new Response();
@@ -31,14 +32,12 @@ public class CustomerController {
         return response;
     }
 
-    @PostMapping("/Login")
-    public Response Login(@RequestBody Customer c)
+    @PostMapping("/login")
+    public Response login(@RequestBody Customer c)
     {
-
         boolean res = customerservice.Login(c.GetUserName(), c.GetPassword());
         Response response = new Response();
-        if (!res)
-        {
+        if (!res) {
             response.setStatus(false);
             response.setMessage("Wrong username or password");
             return response;
@@ -48,13 +47,11 @@ public class CustomerController {
         LoggedInResponse.UpdateStatus(true);
         System.out.println(LoggedInResponse.GetStatus());
         return response;
-
     }
 
     @GetMapping("/view")
 
-    public ArrayList<Customer> view()
-    {
+    public ArrayList<Customer> view() {
         return rep.ViewRepo();
     }
 
