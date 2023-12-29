@@ -13,42 +13,30 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/Customer")
 
-public class CustomerController
-{
-
-
-   CustomerService customerservice=new CustomerService();
-    CustomersRepository rep=new CustomersRepository();
-   LoggedInResponse logged_status;
-
-
-
-
-@PostMapping("/createaccount")
-public Response addCustomer(@RequestBody Customer c)
-{
-    boolean res = customerservice.addCustomer(c);
-    Response response = new Response();
-    if (!res)
-    {
-        response.setStatus(false);
-        response.setMessage("Account Already Exists");
+public class CustomerController {
+    CustomerService customerservice = new CustomerService();
+    CustomersRepository rep = new CustomersRepository();
+    LoggedInResponse logged_status;
+    @PostMapping("/createaccount")
+    public Response addCustomer(@RequestBody Customer c) {
+        boolean res = customerservice.addCustomer(c);
+        Response response = new Response();
+        if (!res) {
+            response.setStatus(false);
+            response.setMessage("Account Already Exists");
+            return response;
+        }
+        response.setStatus(true);
+        response.setMessage("Account created successfully");
         return response;
     }
-    response.setStatus(true);
-    response.setMessage("Account created successfully");
-    return response;
-}
-
 
     @PostMapping("/Login")
-    public Response Login(@RequestBody Customer c)
-    {
+    public Response Login(@RequestBody Customer c) {
 
-        boolean res = customerservice.Login(c.GetUserName(),c.GetPassword());
+        boolean res = customerservice.Login(c.GetUserName(), c.GetPassword());
         Response response = new Response();
-        if (!res)
-        {
+        if (!res) {
             response.setStatus(false);
             response.setMessage("Wrong username or password");
             return response;
@@ -56,16 +44,14 @@ public Response addCustomer(@RequestBody Customer c)
         response.setStatus(true);
         response.setMessage("Logged in successfully");
         LoggedInResponse.UpdateStatus(true);
-       System.out.println(LoggedInResponse.GetStatus());
+        System.out.println(LoggedInResponse.GetStatus());
         return response;
-
 
     }
 
     @GetMapping("/view")
 
-    public ArrayList<Customer> view()
-    {
+    public ArrayList<Customer> view() {
         return rep.ViewRepo();
     }
 

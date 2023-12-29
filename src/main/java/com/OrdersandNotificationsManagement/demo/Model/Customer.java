@@ -2,8 +2,7 @@ package com.OrdersandNotificationsManagement.demo.Model;
 
 import java.util.ArrayList;
 
-public class Customer
-{
+public class Customer {
     String name;
     String phonenumber;
     String  region;

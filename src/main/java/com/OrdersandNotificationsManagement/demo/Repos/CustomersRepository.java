@@ -1,19 +1,18 @@
 package com.OrdersandNotificationsManagement.demo.Repos;
 
 import com.OrdersandNotificationsManagement.demo.Model.Customer;
+import com.OrdersandNotificationsManagement.demo.Model.Product;
 
 import java.util.ArrayList;
 
 public class CustomersRepository implements Repository
 {
-
   public static ArrayList<Customer>Customers=new ArrayList<>();
     @Override
-    public  ArrayList<Customer> ViewRepo()
+    public ArrayList<Customer> ViewRepo()
     {
       return Customers;
     }
-
 
    public static void AddCustomer(Customer c)
     {
