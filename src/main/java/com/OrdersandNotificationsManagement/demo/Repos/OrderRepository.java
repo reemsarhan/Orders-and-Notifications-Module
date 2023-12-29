@@ -23,5 +23,14 @@ public class OrderRepository implements Repository
         Orders.remove(O);
     }
 
+    public static Order GetOrder(Integer orderID)
+    {
+        for (Order order:Orders)
+        {
+            if(order.getID().equals(orderID))
+                return order;
+        }
+        return null;
+    }
 
 }

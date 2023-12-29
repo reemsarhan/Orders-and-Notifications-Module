@@ -5,5 +5,6 @@ public interface Order
 
     public double calcPrice();
 
+    public Integer getID();
 
 }

@@ -1,7 +1,5 @@
 package com.OrdersandNotificationsManagement.demo.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,14 +7,14 @@ import java.util.Map;
 public class SimpleOrder implements Order
 {
     Map<Product, Integer> OrderProducts = new HashMap<>();
-    @JsonProperty("id")
-    public static int id = 0;
+    public int id = 0;
+    public static int idCounter = 0;
     public double TotalPrice = 0;
-    public static double taxvalue = 0;
+    public double ShippingTax = 0;
 
     public SimpleOrder()
     {
-        id = ++id;
+        id = ++idCounter;
     }
 
     public Boolean addProduct(Product p, int numOfProd)
@@ -38,14 +36,14 @@ public class SimpleOrder implements Order
         }
     }
 
-    public static void setTaxvalue(double val)
+    public void SetShippingTax(double val)
     {
-        taxvalue = val;
+        ShippingTax = val;
     }
 
     public double calcPrice()
     {
-        double ShippingTax = TotalPrice * taxvalue;
+        double ShippingTax = TotalPrice * this.ShippingTax;
         return (TotalPrice + ShippingTax);
     }
 
@@ -56,6 +54,12 @@ public class SimpleOrder implements Order
 
     public double getTotalPrice() {
         return TotalPrice;
+    }
+
+    public Map<Product, Integer> viewOrder()
+    {
+       return OrderProducts;
+
     }
 
 }
