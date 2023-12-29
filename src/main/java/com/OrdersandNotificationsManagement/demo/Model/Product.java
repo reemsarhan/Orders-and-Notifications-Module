@@ -1,6 +1,7 @@
 package com.OrdersandNotificationsManagement.demo.Model;
 
-public class Product {
+public class Product
+{
     Category category;
     Integer serialnumber;
     String name;

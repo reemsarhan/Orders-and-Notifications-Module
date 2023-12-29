@@ -32,11 +32,13 @@ public class CustomerController {
     }
 
     @PostMapping("/Login")
-    public Response Login(@RequestBody Customer c) {
+    public Response Login(@RequestBody Customer c)
+    {
 
         boolean res = customerservice.Login(c.GetUserName(), c.GetPassword());
         Response response = new Response();
-        if (!res) {
+        if (!res)
+        {
             response.setStatus(false);
             response.setMessage("Wrong username or password");
             return response;
@@ -51,7 +53,8 @@ public class CustomerController {
 
     @GetMapping("/view")
 
-    public ArrayList<Customer> view() {
+    public ArrayList<Customer> view()
+    {
         return rep.ViewRepo();
     }
 
