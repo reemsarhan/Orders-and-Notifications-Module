@@ -1,6 +1,7 @@
 package com.OrdersandNotificationsManagement.demo.Service;
 
 import com.OrdersandNotificationsManagement.demo.Model.*;
+import com.OrdersandNotificationsManagement.demo.Repos.OrderRepository;
 import com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository;
 
 import java.util.Map;
@@ -39,14 +40,7 @@ public class OrderService
 
     public Integer makeCompoundOrder(Customer C, Map<String, Map<String, Integer>> CompoundOrder)
     {
-        for(String username : CompoundOrder.keySet())
-        {
-            Customer customer = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(username);
-            if(customer == null)
-            {
-                return -1;
-            }
-        }
+
         double customerBalance = 0;
         CompoundOrder order = new CompoundOrder();
         for(String username : CompoundOrder.keySet())
@@ -60,7 +54,7 @@ public class OrderService
                 Product product = ProductsRepository.searchProduct(productName);
                 simpleOrder.addProduct(product, products.get(productName));
             }
-            order.SetShippingTax(0.07);
+            order.setShippingTax(0.07);
             double totalmoney = simpleOrder.calcPrice();
             if(customer.getbalance() < totalmoney)
             {
@@ -74,4 +68,22 @@ public class OrderService
         com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.addOrder(order);
         return order.getID();
     }
+
+    public boolean cancelSimpleOrder(Integer orderId)
+    {
+        for(Order order: OrderRepository.Orders)
+        {
+            if(order.getID().equals(orderId))
+            {
+               Map<Product, Integer> OrderContnent=order.getOrderDetails();
+               com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository.GetCanceledProducts(OrderContnent);
+               com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.removeOrder(order);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }

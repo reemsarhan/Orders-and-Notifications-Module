@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/customer")
 
 public class CustomerController {
     CustomerService customerservice = new CustomerService();

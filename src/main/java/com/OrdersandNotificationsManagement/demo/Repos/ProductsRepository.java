@@ -5,6 +5,7 @@ import com.OrdersandNotificationsManagement.demo.Model.Product;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ProductsRepository implements Repository
 {
@@ -73,4 +74,11 @@ public class ProductsRepository implements Repository
         return null;
     }
 
+    public static void GetCanceledProducts(Map<Product,Integer>Products)
+    {
+        for (Product product : Products.keySet())
+        {
+            product.setTotalComponents(product.getTotalComponents() + Products.get(product));
+        }
+    }
 }

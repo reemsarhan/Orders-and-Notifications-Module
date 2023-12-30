@@ -1,6 +1,9 @@
 package com.OrdersandNotificationsManagement.demo.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CompoundOrder implements Order {
     double totalPrice = 0;
@@ -46,8 +49,17 @@ public class CompoundOrder implements Order {
         return totalPrice;
     }
 
-    public void SetShippingTax(double val)
+    public void setShippingTax(double val)
     {
         ShippingTax = val;
+    }
+
+
+    public Map<Product, Integer> getOrderDetails(){
+        Map<Product, Integer> totalProducts =new HashMap<>();
+        for(SimpleOrder order : orders){
+            totalProducts.putAll(order.getOrderDetails());
+        }
+        return totalProducts;
     }
 }

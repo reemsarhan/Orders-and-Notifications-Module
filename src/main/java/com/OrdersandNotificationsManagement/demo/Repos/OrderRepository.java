@@ -13,6 +13,8 @@ public class OrderRepository implements Repository
         return Orders;
     }
 
+
+
     public static void addOrder(Order O)
     {
         Orders.add(O);
@@ -31,6 +33,11 @@ public class OrderRepository implements Repository
                 return order;
         }
         return null;
+    }
+
+    public ArrayList<Order> getOrders()
+    {
+        return Orders;
     }
 
 }

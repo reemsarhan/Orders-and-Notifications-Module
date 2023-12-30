@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface Repository<T>
 {
-    ArrayList<T> ViewRepo();
+    public ArrayList<T> ViewRepo();
 }

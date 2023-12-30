@@ -23,6 +23,7 @@ public class SimpleOrder implements Order
         {
             OrderProducts.put(p, numOfProd);
             TotalPrice += (p.price * numOfProd);
+
             return true;
         }
         return false;
@@ -62,4 +63,9 @@ public class SimpleOrder implements Order
 
     }
 
+
+    public Map<Product, Integer> getOrderDetails()
+    {
+      return OrderProducts;
+    }
 }

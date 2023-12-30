@@ -9,7 +9,7 @@ import com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository;
 
 
 @RestController
-@RequestMapping(value = "/products") // http://localhost:8080/products
+@RequestMapping(value = "/api/products") // http://localhost:8080/products
 public class ProductsController
 {
     ProductsRepository productsRepository = new ProductsRepository();

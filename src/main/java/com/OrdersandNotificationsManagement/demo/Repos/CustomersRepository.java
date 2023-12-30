@@ -53,4 +53,15 @@ public class CustomersRepository implements Repository<Customer>
         }
         return null;
     }
+
+    public static ArrayList<String> getNotFoundCustomers(ArrayList<String> customers){
+        ArrayList<String> notFoundCustomers = new ArrayList<>();
+        for(String customer : customers){
+            if(GetCustomer(customer) == null){
+                notFoundCustomers.add(customer);
+            }
+        }
+        if (notFoundCustomers.size() == 0) return null;
+        return notFoundCustomers;
+    }
 }

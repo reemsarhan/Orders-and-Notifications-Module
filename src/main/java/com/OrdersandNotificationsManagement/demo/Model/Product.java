@@ -37,7 +37,7 @@ public class Product {
         return price;
     }
 
-    public Integer gettotalComponents()
+    public Integer getTotalComponents()
     {
         return totalComponents;
     }
@@ -63,10 +63,16 @@ public class Product {
         this.price = price;
     }
 
-    public void settotalComponents(Integer totalComponents) {
+//    public void settotalComponents(Integer totalComponents) {
+//        this.totalComponents = totalComponents;
+//    }
+//
+
+
+    public void setTotalComponents(Integer totalComponents)
+    {
         this.totalComponents = totalComponents;
     }
-
     public void updatetotalComponents(Integer DecComponents)
     {
         totalComponents-=DecComponents;
