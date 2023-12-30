@@ -46,7 +46,6 @@ public class OrderService
         for(String username : CompoundOrder.keySet())
         {
             Customer customer = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(username);
-
             Map<String, Integer> products = CompoundOrder.get(username);
             SimpleOrder simpleOrder = new SimpleOrder();
             for(String productName : products.keySet())
@@ -61,7 +60,6 @@ public class OrderService
                 return -1;
             }
             customer.setbalance(customer.getbalance() - totalmoney);
-            com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.addOrder(simpleOrder);
             order.addOrder(simpleOrder);
             C.UpdateBalance(totalmoney);
         }
@@ -83,6 +81,39 @@ public class OrderService
         }
         return false;
     }
+
+    public boolean cancelCompoundOrder(Integer orderId)
+    {
+        for(Order order: OrderRepository.Orders)
+        {
+            if(order.getID().equals(orderId))
+            {
+                // cancel all simple orders inside the compound order
+                for (Order simpleOrder : ((CompoundOrder) order).getOrders()){
+                    cancelSimpleOrder(simpleOrder.getID());
+                }
+                com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.removeOrder(order);
+            }
+        }
+        return false;
+    }
+
+    public boolean cancelSimpleOrderInsideCompound(Integer compoundId,Integer simpleId )
+    {
+//        for(Order order: OrderRepository.Orders)
+//        {
+//            if(order.getID().equals(orderId))
+//            {
+//                Map<Product, Integer> OrderContnent=order.getOrderDetails();
+//                com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository.GetCanceledProducts(OrderContnent);
+//                com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.removeOrder(order);
+//                return true;
+//            }
+//        }
+       return false;
+    }
+
+
 
 
 
