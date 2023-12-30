@@ -78,6 +78,24 @@ public class OrderContoroller
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was something wrong in cancelling Order!");
     }
 
+
+
+
+    @PostMapping("/cancel/{userName}/{compoundOrderID}")
+    public ResponseEntity<?> CancelCompoundOrder(@PathVariable("userName") String userName,@PathVariable("compoundOrderID") Integer compoundOrderID)
+    {
+
+        Customer C = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(userName);
+        if(C!=null)
+        {
+            if (orderService.cancelCompoundOrder(compoundOrderID))
+            {
+                return ResponseEntity.ok("OrderCancelled Successfully");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was something wrong in cancelling Order!");
+    }
+
     @GetMapping("/all")
     public List<Order> getAllOrders()
     {
