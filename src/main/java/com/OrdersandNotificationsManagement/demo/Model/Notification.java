@@ -22,6 +22,13 @@ public class Notification {
         this.templateFormat = templateFormat;
     }
 
+    public String getCustomerPhone(){
+        return customer.getphonenumber();
+    }
+    public String getTemplateType(){
+        return templateFormat.getTemplateType();
+    }
+
     @Override
     public String toString() {
         String s = customer.getname() + " " + channel.getChannelName() + " " + templateFormat.getTemplate();

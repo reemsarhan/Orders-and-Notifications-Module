@@ -1,17 +1,21 @@
 package com.OrdersandNotificationsManagement.demo.Model.Template;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Objects;
 
-public class UsernameProductTemplateFrench implements TemplateStrategy{
+public class OrderPlacementTemplateFrench implements TemplateStrategy{
     private String username;
-    private String productName;
+    private List<String> productName;
     private String[] arguments;
     private final String s = "Cher {0}, votre réservation du {1} est confirmée. merci d'utiliser notre magasin :)";
-    public UsernameProductTemplateFrench(String username,String productName){
+    public OrderPlacementTemplateFrench(String username,List<String> productName){
         this.username = username;
         this.productName = productName;
-        arguments = new String[]{username, productName};
+        arguments = new String[]{username, String.join(", ",productName)};
+    }
+    public String getTemplateType(){
+        return "OrderPlacementProductTemplateFrench";
     }
     @Override
     public String getTemplate() {

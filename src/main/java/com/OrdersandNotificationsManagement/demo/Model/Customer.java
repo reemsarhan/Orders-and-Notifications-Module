@@ -10,7 +10,7 @@ public class Customer
     String address;
     String username;
     String password;
-    Double balance;
+    Double balance ;
 
     ArrayList<Order> CustomerOrders = new ArrayList<>();
 
