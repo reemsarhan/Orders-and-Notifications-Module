@@ -44,11 +44,12 @@ public class OrderContoroller {
             Product product = com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository.searchProduct(productName);
             product.setTotalComponents(product.getTotalComponents() - OrderProducts.get(productName));
         }
-        Order order=com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(OrderID);
+        Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(OrderID);
         order.setCustomerUsername(userData.get("username"));
         return ResponseEntity.ok(orderService.GetOrder(OrderID));
         //  return orderService.GetOrder(OrderID);
     }
+
     /**
      * Creates a compound order for a customer with the given orders from different users.
      *
@@ -86,6 +87,7 @@ public class OrderContoroller {
         }
         return ResponseEntity.ok(orderService.GetOrder(OrderID));
     }
+
     /**
      * Cancels a simple order with the specified username and order ID.
      *
@@ -99,7 +101,7 @@ public class OrderContoroller {
         Customer C = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(userName);
         if (C != null) {
             Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderID);
-            if(order == null){
+            if (order == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Order not found!");
             }
             boolean status = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderID).getOrderShippingStatus();
@@ -112,6 +114,7 @@ public class OrderContoroller {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was something wrong in cancelling Order!");
     }
+
     /**
      * Cancels a compound order with the specified username and compound order ID.
      *
@@ -126,7 +129,7 @@ public class OrderContoroller {
         Customer C = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(userName);
         if (C != null) {
             Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(compoundOrderID);
-            if(order == null){
+            if (order == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Order not found!");
             }
             boolean status = order.getOrderShippingStatus();
