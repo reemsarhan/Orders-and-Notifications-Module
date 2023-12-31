@@ -12,7 +12,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ShippingService {
+
+    /**
+     * The duration (in minutes) within which an order can be canceled after shipping confirmation.
+     */
     public static final int CANCELLATION_DURATION_MINUTES = 5;
+
+    /**
+     * Confirms shipping for a simple order with the specified order ID.
+     *
+     * @param orderId      The ID of the simple order to confirm shipping.
+     * @param shippingFees The shipping fees to be deducted from the customer's balance.
+     * @return true if the shipping is confirmed successfully; false otherwise.
+     */
     public Boolean confirmShippingSimpleOrder(Integer orderId, double shippingFees) {
         Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderId);
         /*
@@ -41,6 +53,13 @@ public class ShippingService {
         order.ConfirmOrderShipping();
         return true;
     }
+    /**
+     * Confirms shipping for a compound order with the specified order ID.
+     *
+     * @param orderID      The ID of the compound order to confirm shipping.
+     * @param shippingFees The shipping fees to be deducted from each customer's balance.
+     * @return true if the shipping is confirmed successfully; false otherwise.
+     */
 
     public Boolean confirmShippingCompoundOrder(Integer orderID, double shippingFees) {
         Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderID);
@@ -77,6 +96,13 @@ public class ShippingService {
         order.ConfirmOrderShipping();
         return true;
     }
+    /**
+     * Cancels shipping for a simple order with the specified order ID.
+     *
+     * @param orderId      The ID of the simple order to cancel shipping.
+     * @param shippingFees The shipping fees to be returned to the customer's balance.
+     * @return true if the shipping is canceled successfully; false otherwise.
+     */
 
     public Boolean cancelSimpleShipping(Integer orderId, double shippingFees) {
         Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderId);
@@ -89,7 +115,13 @@ public class ShippingService {
         order.CancelOrderShipping();
         return true;
     }
-
+    /**
+     * Cancels shipping for a compound order with the specified order ID.
+     *
+     * @param orderID      The ID of the compound order to cancel shipping.
+     * @param shippingFees The shipping fees to be returned to each customer's balance.
+     * @return true if the shipping is canceled successfully; false otherwise.
+     */
     public Boolean cancelCompoundShipping(Integer orderID, double shippingFees) {
         Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderID);
         if (order == null || !orderCanBeCanceled(orderID)) {
@@ -102,6 +134,12 @@ public class ShippingService {
         return true;
     }
 
+    /**
+     * Checks if an order can be canceled based on the cancellation duration.
+     *
+     * @param orderID The ID of the order to check.
+     * @return true if the order can be canceled; false otherwise.
+     */
     public Boolean orderCanBeCanceled(Integer orderID) {
         LocalDateTime currentTime = LocalDateTime.now();
         Order order = com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.GetOrder(orderID);

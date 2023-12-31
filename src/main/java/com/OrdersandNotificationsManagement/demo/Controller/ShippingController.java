@@ -19,6 +19,12 @@ public class ShippingController {
     public static final double COMPOUND_SHIPPING_FEES = 20;
     ShippingService shippingService = new ShippingService();
 
+    /**
+     * Confirms shipping for a simple order with the specified order ID.
+     *
+     * @param orderID The ID of the simple order to confirm shipping.
+     * @return ResponseEntity indicating the success or failure of the shipping confirmation.
+     */
     @PostMapping("/confirmSimple/{orderID}")
     public ResponseEntity<?> confirmShippingSimpleOrder(@PathVariable("orderID") Integer orderID) {
         Boolean status = shippingService.confirmShippingSimpleOrder(orderID, SIMPLE_SHIPPING_FEES);
@@ -29,7 +35,12 @@ public class ShippingController {
 
         }
     }
-
+    /**
+     * Confirms shipping for a compound order with the specified order ID.
+     *
+     * @param orderID The ID of the compound order to confirm shipping.
+     * @return ResponseEntity indicating the success or failure of the shipping confirmation.
+     */
     @PostMapping("/confirmCompound/{orderID}")
     public ResponseEntity<?> confirmShippingCompoundOrder(@PathVariable("orderID") Integer orderID) {
         Boolean status = shippingService.confirmShippingCompoundOrder(orderID, COMPOUND_SHIPPING_FEES);
@@ -41,6 +52,13 @@ public class ShippingController {
         }
     }
 
+    /**
+     * Cancels shipping for a simple order with the specified username and order ID.
+     *
+     * @param username The username of the customer.
+     * @param orderID  The ID of the simple order to cancel shipping.
+     * @return ResponseEntity indicating the success or failure of the shipping cancellation.
+     */
     @PostMapping("/cancel/simple/{username}/{orderID}")
     public ResponseEntity<?> cancelSimpleOrderShipping(@PathVariable("username") String username, @PathVariable("orderID") Integer orderID) {
         Customer customer = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(username);
@@ -55,7 +73,13 @@ public class ShippingController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was something wrong in cancelling the shipping!");
     }
-
+    /**
+     * Cancels shipping for a compound order with the specified username and compound order ID.
+     *
+     * @param compoundID The ID of the compound order to cancel shipping.
+     * @param username   The username of the customer.
+     * @return ResponseEntity indicating the success or failure of the shipping cancellation.
+     */
     @PostMapping("/cancel/compound/{username}/{compoundID}")
     public ResponseEntity<?> cancelCompoundOrderShipping(@PathVariable("compoundID") Integer compoundID, @PathVariable("username") String username) {
         Customer customer = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.GetCustomer(username);

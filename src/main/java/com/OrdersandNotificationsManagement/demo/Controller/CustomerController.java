@@ -17,7 +17,12 @@ public class CustomerController {
     CustomerService customerservice = new CustomerService();
     CustomersRepository rep = new CustomersRepository();
     LoggedInResponse logged_status;
-
+    /**
+     * Adds a new customer to the system.
+     *
+     * @param c The customer to be added.
+     * @return A Response object indicating the result of the operation.
+     */
     @PostMapping("/create")
     public Response addCustomer(@RequestBody Customer c) {
         boolean res = customerservice.addCustomer(c);
@@ -31,7 +36,12 @@ public class CustomerController {
         response.setMessage("Account created successfully");
         return response;
     }
-
+    /**
+     * Logs in a customer with the provided username and password.
+     *
+     * @param c The customer with username and password for login.
+     * @return A Response object indicating the result of the login operation.
+     */
     @PostMapping("/login")
     public Response login(@RequestBody Customer c)
     {
@@ -49,6 +59,11 @@ public class CustomerController {
         return response;
     }
 
+    /**
+     * Retrieves a list of all customers in the system.
+     *
+     * @return An ArrayList of Customer objects representing all customers in the system.
+     */
     @GetMapping("/view")
 
     public ArrayList<Customer> view() {

@@ -6,7 +6,12 @@ import com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository;
 
 public class CustomerService
 {
-
+    /**
+     * Adds a new customer to the system.
+     *
+     * @param c The customer to be added.
+     * @return true if the customer is added successfully; false if the customer already exists or an exception occurs.
+     */
     public Boolean addCustomer(Customer c)
     {
         try
@@ -26,7 +31,13 @@ public class CustomerService
         return true;
     }
 
-
+    /**
+     * Performs customer login and updates the logged-in status.
+     *
+     * @param Username The username of the customer.
+     * @param Password The password of the customer.
+     * @return true if the login is successful; false otherwise.
+     */
     public Boolean Login(String Username, String Password)
     {
         try

@@ -21,6 +21,13 @@ public class OrderContoroller {
     OrderService orderService = new OrderService();
     OrderRepository OrderRepository = new OrderRepository();
 
+    /**
+     * Creates a simple order for a customer with the given products and quantities.
+     *
+     * @param userData      User authentication data including username and password.
+     * @param OrderProducts Map of product names and their quantities in the order.
+     * @return ResponseEntity with the created order or an error message.
+     */
     @PostMapping("/make/simple")
     public ResponseEntity<?> makeSimpleOrder(@RequestHeader Map<String, String> userData, @RequestBody Map<String, Integer> OrderProducts) {
         Customer customer = com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository.getCustomer(userData.get("username"), userData.get("password"));
@@ -42,7 +49,13 @@ public class OrderContoroller {
         return ResponseEntity.ok(orderService.GetOrder(OrderID));
         //  return orderService.GetOrder(OrderID);
     }
-
+    /**
+     * Creates a compound order for a customer with the given orders from different users.
+     *
+     * @param userData      User authentication data including username and password.
+     * @param CompoundOrder Map of usernames and their corresponding orders.
+     * @return ResponseEntity with the created order or an error message.
+     */
     @PostMapping("/make/compound")
     public ResponseEntity<?> makeCompoundOrder(@RequestHeader Map<String, String> userData, @RequestBody Map<String, Map<String, Integer>> CompoundOrder) {
         /* Map Representation of Compound Order is as follows:
@@ -73,7 +86,13 @@ public class OrderContoroller {
         }
         return ResponseEntity.ok(orderService.GetOrder(OrderID));
     }
-
+    /**
+     * Cancels a simple order with the specified username and order ID.
+     *
+     * @param userName The username of the customer.
+     * @param orderID  The ID of the order to be cancelled.
+     * @return ResponseEntity indicating the success or failure of the cancellation.
+     */
     @PostMapping("/cancel/0/{userName}/{orderID}")
     public ResponseEntity<?> CancelSimpleOrder(@PathVariable("userName") String userName, @PathVariable("orderID") Integer orderID) {
 
@@ -93,7 +112,13 @@ public class OrderContoroller {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was something wrong in cancelling Order!");
     }
-
+    /**
+     * Cancels a compound order with the specified username and compound order ID.
+     *
+     * @param userName        The username of the customer.
+     * @param compoundOrderID The ID of the compound order to be cancelled.
+     * @return ResponseEntity indicating the success or failure of the cancellation.
+     */
 
     @PostMapping("/cancel/1/{userName}/{compoundOrderID}")
     public ResponseEntity<?> CancelCompoundOrder(@PathVariable("userName") String userName, @PathVariable("compoundOrderID") Integer compoundOrderID) {
@@ -116,6 +141,11 @@ public class OrderContoroller {
     }
 
 
+    /**
+     * Retrieves all orders in the system.
+     *
+     * @return List of orders if the user is logged in; otherwise, returns null.
+     */
     @GetMapping("/all")
     public List<Order> getAllOrders() {
         ArrayList<Order> orders = OrderRepository.ViewRepo();

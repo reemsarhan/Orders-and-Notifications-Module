@@ -18,13 +18,23 @@ import java.util.List;
 @RequestMapping("/api/notification")
 public class NotificationController {
     private final NotificationService notificationService = new NotificationService();
-
+    /**
+     * Sends all notifications in the system.
+     *
+     * @return A Response object indicating the result of the send operation.
+     * @see NotificationService#sendAllNotifications()
+     */
     @GetMapping("/send")
     public Response sendAllNotifications()   //http://localhost:8080/notification/send
     {
         return notificationService.sendAllNotifications();
     }
-
+    /**
+     * Retrieves a list of all notifications in the system.
+     *
+     * @return A List of Notification objects representing all notifications in the system.
+     * @see NotificationService#viewAllNotifications()
+     */
     @GetMapping("/view") //http://localhost:8080/notification/view
     public List<Notification> viewAllNotifications() {
         return notificationService.viewAllNotifications();
