@@ -14,7 +14,7 @@ public class CompoundOrder implements Order {
     public double ShippingTax = 0;
     public LocalDateTime orderShippingConfirmationDate;
     public Boolean IsShipped = false;
-    public static String cutomerUsername;
+    public  String cutomerUsername;
 
 
     public CompoundOrder() {
