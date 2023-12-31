@@ -3,6 +3,7 @@ package com.OrdersandNotificationsManagement.demo.Service;
 import com.OrdersandNotificationsManagement.demo.Model.*;
 import com.OrdersandNotificationsManagement.demo.Model.Channel.SMSChannel;
 import com.OrdersandNotificationsManagement.demo.Model.Template.OrderPlacementTemplateEnglish;
+import com.OrdersandNotificationsManagement.demo.Repos.CustomersRepository;
 import com.OrdersandNotificationsManagement.demo.Repos.NotificationQueue;
 import com.OrdersandNotificationsManagement.demo.Repos.OrderRepository;
 import com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository;
@@ -33,7 +34,6 @@ public class OrderService {
 
         C.setbalance(customerBalance - totalmoney);
         com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.addOrder(order);
-        C.UpdateBalance(totalmoney);
         return order.getID();
     }
 
@@ -84,8 +84,11 @@ public class OrderService {
     public static boolean cancelSimpleOrder(Integer orderId) {
         for (Order order : OrderRepository.Orders) {
             if (order.getID().equals(orderId)) {
-                Map<Product, Integer> OrderContnent = order.getOrderDetails();
-                com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository.GetCanceledProducts(OrderContnent);
+                // Return the price of the order to customer's balance again
+                Customer customer = CustomersRepository.GetCustomer(order.getCutomerUsername());
+                customer.setbalance(customer.getbalance() + order.calcPrice());
+                Map<Product, Integer> OrderContent = order.getOrderDetails();
+                com.OrdersandNotificationsManagement.demo.Repos.ProductsRepository.GetCanceledProducts(OrderContent);
                 com.OrdersandNotificationsManagement.demo.Repos.OrderRepository.removeOrder(order);
                 return true;
             }

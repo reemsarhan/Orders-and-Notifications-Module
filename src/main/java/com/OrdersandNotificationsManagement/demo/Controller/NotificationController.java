@@ -27,19 +27,6 @@ public class NotificationController {
 
     @GetMapping("/view") //http://localhost:8080/notification/view
     public List<Notification> viewAllNotifications() {
-        try {
-            NotificationQueue.AddNotification(new Notification(
-                    new Customer("Ahmed", "0100", Region.valueOf("Dokki"), "Cairo", "Tam", "Abdelrhman", 100.0),
-                    new SimpleOrder(),
-                    new EmailChannel(),
-                    new OrderPlacementTemplateEnglish("Abdelrahman", new ArrayList<String>(Arrays.asList("Mobile", "Charger")))
-            ));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-        for (Notification n : notificationService.viewAllNotifications()) {
-            System.out.println(n);
-        }
         return notificationService.viewAllNotifications();
     }
 }
