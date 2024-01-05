@@ -1,4 +1,4 @@
-# API Collection Documentation
+# Order and Notifications Module
 
 Welcome to the API Collection documentation. This collection provides a set of APIs to interact with different aspects of the system, including customer management, product information, order processing, shipping, notifications, and statistics.
 
